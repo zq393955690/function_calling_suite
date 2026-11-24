@@ -21,7 +21,7 @@ The transcript can contain:
 - tool results returned by Dify;
 - role and tool-call linkage metadata needed to replay the conversation.
 
-If a file name or file content appears in a query or in tool output, it can therefore be part of the stored transcript. The plugin does not read or store files by itself.
+If a file name or file content appears in a query or in tool output, it can therefore be part of the stored transcript.
 
 History is scoped to the Dify conversation, not to an individual Agent node. Multiple Agent nodes using this plugin in the same conversation share one transcript.
 
@@ -47,6 +47,12 @@ The plugin has no separate export or delete UI. Storage is managed by the Dify d
 When a strategy has history enabled, the selected history window is included in the prompt sent to the configured model. When history is disabled, previous turns are not injected, but the current query and the current run's tool interactions are still processed normally.
 
 Model calls and tool calls are performed through the Dify platform. The model provider and tool providers configured in the Dify deployment receive the content necessary to perform those calls, under their own policies. The plugin author does not receive this content.
+
+## Files
+
+Files attached to the Agent node are passed to the model through Dify; image attachments are base64-encoded into the prompt. The plugin does not persist them as separate files.
+
+When a tool returns an image or image-link message whose text begins with `/files/`, the plugin may read that one local file and forward it to the user as a blob. This is the only local filesystem read. The plugin does not otherwise access the filesystem, and it never writes, deletes, or modifies files.
 
 ## Network access
 

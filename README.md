@@ -17,7 +17,8 @@ The strategies share the same model/tool loop and parameters. They differ only i
 - Dify 1.11.2 or later.
 - A model that supports native function/tool calling.
 - Tools supplied to the Agent node. The strategy does not bundle any tools.
-- The plugin uses Dify's model invocation, tool invocation, and plugin storage APIs. It makes no direct outbound HTTP requests.
+- The plugin uses Dify's model invocation, tool invocation, and plugin storage APIs. No additional network connection, endpoint, or proxy configuration is required, and the plugin makes no direct outbound HTTP requests.
+- The plugin forwards tool-generated images. If a tool returns an image message whose text begins with `/files/`, the plugin may read that one local file to send it to the user; it does not otherwise access the filesystem and does not write files.
 
 ## Installation
 
@@ -78,7 +79,7 @@ This means:
 ## Compatibility and limits
 
 - Plugin version: `0.1.0`.
-- Minimum Dify version: `1.11.2` (tested on Dify 1.11.2).
+- Minimum Dify version: `1.11.2`.
 - Plugin runtime: Python 3.12, `amd64` and `arm64`.
 - The selected model must support native function calling. JSON-mode-only or text-only models are not supported by this strategy.
 - The token budget is an estimate (about 0.6 tokens per character); it is a guardrail, not an exact token count.
