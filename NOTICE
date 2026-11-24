@@ -1,0 +1,16 @@
+Function Calling Suite
+Copyright 2026 zq393955690
+
+This product includes software derived from the LangGenius Dify official
+agent plugin, distributed at https://github.com/langgenius/dify-official-plugins
+under the Apache License, Version 2.0.
+
+The derived files have been modified for this plugin: plugin and provider
+identity were renamed, the strategy set was reduced to native function calling,
+a three-mode conversation-history implementation was added, and tool allowlist
+and tool-response helpers were added. The full Apache License 2.0 text is in
+LICENSE.
+
+Dify is a trademark of LangGenius, Inc. This project is an independent
+community plugin and is not affiliated with, endorsed by, or sponsored by
+LangGenius.

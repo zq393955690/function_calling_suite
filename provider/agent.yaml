@@ -1,0 +1,17 @@
+identity:
+  author: "zq393955690"
+  name: function_calling_suite
+  label:
+    en_US: Function Calling Suite
+    zh_Hans: 函数调用策略集
+  description:
+    en_US: Native function calling strategies with configurable conversation history.
+    zh_Hans: 历史可配置的原生函数调用策略。
+  icon: icon.svg
+strategies:
+  - strategies/function_calling.yaml
+  - strategies/function_calling_off.yaml
+  - strategies/function_calling_full.yaml
+extra:
+  python:
+    source: provider/agent.py

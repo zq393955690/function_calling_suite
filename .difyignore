@@ -1,0 +1,33 @@
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Local secrets and machine-specific files
+.env
+.env.*
+!.env.example
+*.local
+
+# Version control, editor and OS metadata
+.git/
+.gitignore
+.github/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Build artifacts and local scratch
+dist/
+build/
+*.difypkg
+.tmp/
+.private/
+tests/

@@ -1,0 +1,111 @@
+# Derived from langgenius/dify-official-plugins (agent), Apache-2.0.
+# Modified for Function Calling Suite.
+
+identity:
+  name: function_calling_text
+  author: "zq393955690"
+  label:
+    en_US: FunctionCalling (Q&A history)
+    zh_Hans: FunctionCalling（问答历史）
+description:
+  en_US: "Native function calling; replays previous question/answer text only (tool calls are not replayed). The history window is managed by this strategy."
+  zh_Hans: "原生函数调用；历史只回放问答文本，不回放工具调用与结果。历史窗口由本策略自行管理。"
+parameters:
+  - name: model
+    type: model-selector
+    scope: tool-call&llm
+    required: true
+    label:
+      en_US: Model
+      zh_Hans: 模型
+
+  - name: allowed_tools
+    type: any
+    scope: array[string]
+    required: false
+    label:
+      en_US: Allowed tools
+      zh_Hans: 允许的工具
+    help:
+      en_US: Optional. If this list has tool names, only those tools are sent to the model and allowed to run.
+      zh_Hans: 可选。若填写工具名称，则仅这些工具会暴露给模型并允许调用。
+
+  - name: tools
+    type: array[tools]
+    required: true
+    label:
+      en_US: Tool list
+      zh_Hans: 工具列表
+
+  - name: instruction
+    type: string
+    required: true
+    label:
+      en_US: Instruction
+      zh_Hans: 指令
+    auto_generate:
+      type: prompt_instruction
+    template:
+      enabled: true
+
+  - name: context
+    type: any
+    scope: array[object]
+    required: false
+    label:
+      en_US: Context
+      zh_Hans: 上下文
+
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query
+      zh_Hans: 查询
+
+  - name: files
+    type: any
+    scope: array[file]
+    required: false
+    label:
+      en_US: Current-turn files
+      zh_Hans: 当前轮文件
+
+  - name: history_turns
+    type: number
+    required: false
+    default: 10
+    min: 1
+    max: 100
+    label:
+      en_US: History turns
+      zh_Hans: 历史轮数
+    help:
+      en_US: Maximum number of history turns replayed; older turns are dropped first. One turn = one user message plus the assistant and tool messages that follow it. In no-history mode it only bounds how much transcript is kept for later strategy switches.
+      zh_Hans: 作为历史回放的最大轮数，超出时从最老的轮次开始丢弃。一个轮 = 一条用户消息 + 其后所有助手与工具消息。不带历史模式下只约束落盘保留量，供之后切换策略接续。
+
+  - name: max_history_tokens_k
+    type: number
+    required: false
+    default: 64
+    min: 1
+    max: 200
+    label:
+      en_US: Max history tokens (K)
+      zh_Hans: 历史 token 上限（K）
+    help:
+      en_US: "In thousands (K): 64 = 64,000. Rough character-based estimate, not a hard cap; bounds replayed history only, dropping the oldest whole turns first. In no-history mode no history is injected; it only affects retained transcript."
+      zh_Hans: "以 K 为单位：64 = 64,000。按字符粗略估算，不是硬上限；只约束回放的历史，超出时先丢最老整轮。不带历史模式下不注入历史，只影响落盘保留量。"
+
+  - name: maximum_iterations
+    type: number
+    required: true
+    label:
+      en_US: Maximum Iterations
+      zh_Hans: 最大迭代次数
+    default: 3
+    max: 500
+    min: 1
+extra:
+  python:
+    source: strategies/function_calling.py

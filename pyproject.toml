@@ -1,0 +1,15 @@
+[project]
+name = "function-calling-suite"
+version = "0.1.0"
+description = "Dify agent strategies for native function calling with caller-controlled conversation history"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+
+# Runtime dependencies are pinned in requirements.txt for the plugin package.
+dependencies = [
+    "dify_plugin>=0.9.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
