@@ -1,7 +1,7 @@
 [project]
 name = "function-calling-suite"
-version = "0.1.0"
-description = "Dify agent strategies for native function calling with caller-controlled conversation history"
+version = "0.1.1"
+description = "Dify agent strategies for native function calling (tool calling) with caller-controlled conversation history"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.12"

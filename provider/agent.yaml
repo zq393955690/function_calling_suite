@@ -2,11 +2,11 @@ identity:
   author: "zq393955690"
   name: function_calling_suite
   label:
-    en_US: Function Calling Suite
-    zh_Hans: 函数调用策略集
+    en_US: Function Calling Agent Strategies
+    zh_Hans: 工具调用 Agent 策略集
   description:
-    en_US: Native function calling strategies with configurable conversation history.
-    zh_Hans: 历史可配置的原生函数调用策略。
+    en_US: Native function calling (tool calling) agent strategies with configurable conversation history.
+    zh_Hans: 历史可配置的原生函数调用（工具调用）Agent 策略集。
   icon: icon.svg
 strategies:
   - strategies/function_calling.yaml

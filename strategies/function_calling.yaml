@@ -6,7 +6,7 @@ identity:
   author: "zq393955690"
   label:
     en_US: FunctionCalling (Q&A history)
-    zh_Hans: FunctionCalling（问答历史）
+    zh_Hans: 工具调用（问答历史）
 description:
   en_US: "Native function calling; replays previous question/answer text only (tool calls are not replayed). The history window is managed by this strategy."
   zh_Hans: "原生函数调用；历史只回放问答文本，不回放工具调用与结果。历史窗口由本策略自行管理。"

@@ -1,6 +1,8 @@
-# 函数调用策略集（Function Calling Suite）
+# 工具调用 Agent 策略集（Function Calling Agent Strategies）
 
 这是一个 Dify Agent 策略插件，提供三种原生函数调用（Function Calling）策略，并由调用方自行控制对话历史。
+
+文中“工具调用”与“原生函数调用（function calling）”指同一能力，本插件在中文界面使用“工具调用”。
 
 三个策略共用同一套模型/工具循环与参数，区别只在于历史如何回放：只回放纯文本问答、不回放历史，或回放完整的工具调用历史。历史窗口由本策略管理，不依赖 Dify 内置的对话记忆。
 
@@ -8,9 +10,9 @@
 
 | 策略显示名 | 内部 ID | 历史行为 |
 | --- | --- | --- |
-| FunctionCalling（问答历史） | `function_calling_text` | 回放此前的用户/助手文本；不回放工具调用与工具结果。 |
-| FunctionCalling（不带历史） | `function_calling_off` | 不回放历史；仍会记录转写，便于之后切换到带历史的策略接续。 |
-| FunctionCalling（完整历史） | `function_calling_full` | 回放文本、助手的工具调用以及工具结果。 |
+| 工具调用（问答历史） | `function_calling_text` | 回放此前的用户/助手文本；不回放工具调用与工具结果。 |
+| 工具调用（不带历史） | `function_calling_off` | 不回放历史；仍会记录转写，便于之后切换到带历史的策略接续。 |
+| 工具调用（完整历史） | `function_calling_full` | 回放文本、助手的工具调用以及工具结果。 |
 
 ## 环境要求
 
@@ -24,11 +26,11 @@
 
 ### 从 Dify 市场安装
 
-在 Dify 市场安装 **Function Calling Suite / 函数调用策略集**，然后在 Agent 节点中选择本插件提供的三种策略之一。
+在 Dify 市场安装 **工具调用 Agent 策略集 / Function Calling Agent Strategies**，然后在 Agent 节点中选择本插件提供的三种策略之一。
 
 ### 从本地安装
 
-1. 构建或获取 `function_calling_suite-0.1.0.difypkg`。
+1. 构建或获取 `function_calling_suite-0.1.1.difypkg`。
 2. 在 Dify 中打开 **插件 > 安装插件 > 从本地包安装**。
 3. 上传并启用插件。
 
@@ -78,7 +80,7 @@ agent_transcript:{conversation_id}
 
 ## 兼容性与限制
 
-- 插件版本：`0.1.0`。
+- 插件版本：`0.1.1`。
 - 最低 Dify 版本：`1.11.2`。
 - 插件运行时：Python 3.12，支持 `amd64` 与 `arm64`。
 - 所选模型必须支持原生函数调用；仅支持 JSON 模式或纯文本的模型不适用于本策略。

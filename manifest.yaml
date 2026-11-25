@@ -1,15 +1,15 @@
-version: 0.1.0
+version: 0.1.1
 type: plugin
 author: "zq393955690"
 name: "function_calling_suite"
 label:
-  en_US: "Function Calling Suite"
-  zh_Hans: "函数调用策略集"
+  en_US: "Function Calling Agent Strategies"
+  zh_Hans: "工具调用 Agent 策略集"
 created_at: "2026-11-24T00:00:00.000000000Z"
 icon: icon.svg
 description:
-  en_US: "Native function calling strategies with caller-controlled conversation history and tool-call replay."
-  zh_Hans: "原生函数调用策略集；历史轮数与 token 上限可自控，支持问答历史、无历史和完整工具调用历史三种模式。"
+  en_US: "Native function calling (tool calling) agent strategies with caller-controlled conversation history and tool-call replay."
+  zh_Hans: "原生函数调用（工具调用）Agent 策略集；历史轮数与 token 上限可自控，支持问答历史、无历史和完整工具调用历史三种模式。"
 tags:
   - "agent"
 resource:

@@ -1,6 +1,6 @@
-# Function Calling Suite
+# Function Calling Agent Strategies
 
-A Dify agent-strategy plugin that provides three native function-calling strategies with caller-controlled conversation history.
+A Dify agent-strategy plugin that provides three native function-calling strategies with caller-controlled conversation history. Native function calling is also called tool calling; both terms refer to the same model capability.
 
 The strategies share the same model/tool loop and parameters. They differ only in how previous turns are replayed: plain Q&A text, no history, or full tool-call history. The history window is owned by the strategy rather than by Dify's built-in conversation memory.
 
@@ -24,11 +24,11 @@ The strategies share the same model/tool loop and parameters. They differ only i
 
 ### From the Dify Marketplace
 
-Install **Function Calling Suite** from the Dify Marketplace, then add an Agent node and select one of the three strategies from the **Function Calling Suite** provider.
+Install **Function Calling Agent Strategies** from the Dify Marketplace, then add an Agent node and select one of the three strategies from the **Function Calling Agent Strategies** provider.
 
 ### From a local package
 
-1. Build or obtain `function_calling_suite-0.1.0.difypkg`.
+1. Build or obtain `function_calling_suite-0.1.1.difypkg`.
 2. In Dify, open **Plugins > Install Plugin > Install from local package**.
 3. Upload the package and enable the plugin.
 
@@ -78,7 +78,7 @@ This means:
 
 ## Compatibility and limits
 
-- Plugin version: `0.1.0`.
+- Plugin version: `0.1.1`.
 - Minimum Dify version: `1.11.2`.
 - Plugin runtime: Python 3.12, `amd64` and `arm64`.
 - The selected model must support native function calling. JSON-mode-only or text-only models are not supported by this strategy.

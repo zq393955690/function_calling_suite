@@ -6,7 +6,7 @@ identity:
   author: "zq393955690"
   label:
     en_US: FunctionCalling (no history)
-    zh_Hans: FunctionCalling（不带历史）
+    zh_Hans: 工具调用（不带历史）
 description:
   en_US: "Native function calling; no history is sent to the model, but the transcript is still recorded and trimmed by the window settings, so switching to a history strategy later can continue the conversation."
   zh_Hans: "原生函数调用；不向模型注入历史，但对话仍会记录并按窗口设置裁剪，之后切换到带历史的策略可以接续。"

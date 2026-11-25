@@ -1,7 +1,7 @@
 # Privacy Policy
 
-**Plugin:** Function Calling Suite (`function_calling_suite`)
-**Last updated:** 2026-11-24
+**Plugin:** Function Calling Agent Strategies (`function_calling_suite`)
+**Last updated:** 2026-11-25
 
 This policy describes the data handling performed by this plugin. The Dify deployment that runs the plugin, and the model and tool providers configured in that deployment, have their own privacy policies.
 
