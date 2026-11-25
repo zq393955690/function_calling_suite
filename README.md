@@ -12,6 +12,20 @@ The strategies share the same model/tool loop and parameters. They differ only i
 | FunctionCalling (no history) | `function_calling_off` | Replays no history. The transcript is still recorded for a later switch to a history-enabled strategy. |
 | FunctionCalling (full history) | `function_calling_full` | Replays text, assistant tool calls, and tool results. |
 
+## Choosing a history mode
+
+Choose by what the next model turn needs, not by how much context you can keep.
+
+| Situation | Recommended strategy | Why |
+| --- | --- | --- |
+| Multi-turn chat where tool calls are incidental and the conversation text should stay clean. | FunctionCalling (Q&A history) | Replays user and assistant text while dropping tool-call turns, so old tool arguments do not crowd the prompt. |
+| One-shot extraction, classification, or routing where each run stands alone. | FunctionCalling (no history) | Sends no prior turns, but still records the transcript so a later history-enabled run can continue. |
+| Multi-step tool use where later steps depend on earlier tool results or arguments. | FunctionCalling (full history) | Replays text, tool calls, and tool results together so the model can continue the tool chain. |
+| Several Agent nodes in one conversation with different jobs, such as a chat node and a tool node. | Choose per node | Each node can use a different strategy. The transcript key is shared per conversation; the mode changes what is replayed, not what is recorded. |
+| Investigating why an agent repeated or skipped a tool call. | FunctionCalling (full history) | Keeps the tool chain visible to the model; use a smaller `history_turns` or `max_history_tokens_k` to control cost. |
+
+History is stored per Dify conversation. A Chatflow, or another app that supplies a conversation ID, can accumulate and replay history. A one-off Workflow run without a conversation ID has nowhere to store the transcript; the plugin does not create a conversation ID, so no history is replayed in that run.
+
 ## Requirements
 
 - Dify 1.11.2 or later.
@@ -50,6 +64,31 @@ All three strategies expose the same parameters.
 | `maximum_iterations` | No | `3` | Maximum model/tool loop iterations, range 1-500. |
 
 In no-history mode, `history_turns` and `max_history_tokens_k` do not inject history. They only bound how much transcript is retained for a later switch to another strategy.
+
+## Minimal Chatflow example
+
+This is a wiring recipe rather than an importable DSL, because node IDs and model providers are environment-specific.
+
+```text
+Start (sys.query) -> Agent (FunctionCalling full history, one tool) -> Answer
+```
+
+1. Create a Chatflow and add a **Start** node.
+2. Add an **Agent** node and choose the **Function Calling Agent Strategies** provider.
+3. Select **FunctionCalling (full history)** and a model that supports native tool calling.
+4. Add one tool to the Agent node, such as a time tool or an HTTP request tool. Optionally set `allowed_tools` to that tool name.
+5. Set the instruction to something like: `Use the available tool when it is needed. If a tool fails, explain the failure.`
+6. Map the Chatflow user input to `query`.
+7. Connect the Agent output to the **Answer** node and publish.
+8. Run the Chatflow twice in the same conversation. The second run should receive the first run's user, assistant, and tool turns, subject to `history_turns` and `max_history_tokens_k`.
+
+To compare modes, duplicate the Chatflow and switch only the strategy:
+
+- **FunctionCalling (Q&A history)** keeps the conversation text but drops tool-call turns.
+- **FunctionCalling (no history)** starts each run without prior turns.
+- **FunctionCalling (full history)** keeps the tool chain.
+
+The plugin does not bundle a model or tools; select both in the Agent node.
 
 ## How history works
 
